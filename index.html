@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock, Paper, Scissors</title>
+  </head>
+  <body>
+    <script>
+      function getComputerChoice() {
+        let randomNumber = Math.floor(Math.random() * 3);
+        let computerChoice;
+        if (randomNumber === 0) {
+          computerChoice = "scissors";
+        } else if (randomNumber === 1) {
+          computerChoice = "rock";
+        } else {
+          computerChoice = "paper";
+        }
+
+        return computerChoice;
+      }
+
+      function getHumanChoice() {
+        let playerChoice = prompt("rock, scissors or paper?", "").toLowerCase();
+        return playerChoice;
+      }
+
+      let humanScore = 0;
+        let computerScore = 0;
+
+      function playGame() {
+        
+
+        function playRound(humanSelection, computerSelection) {
+          humanSelection = getHumanChoice();
+          computerSelection = getComputerChoice();
+          if (
+            (humanSelection === "rock" && computerSelection === "paper") ||
+            (humanSelection === "paper" && computerSelection === "scissors") ||
+            (humanSelection === "scissors" && computerSelection === "rock")
+          ) {
+            computerScore += 1;
+            console.log(
+              `You lost! ${computerSelection} beats ${humanSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
+            );
+          } else if (
+            (humanSelection === "rock" && computerSelection === "scissors") ||
+            (humanSelection === "scissors" && computerSelection === "paper") ||
+            (humanSelection === "paper" && computerSelection === "rock")
+          ) {
+            humanScore += 1;
+            console.log(
+              `You win! ${humanSelection} beats ${computerSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
+            );
+          } else if (humanSelection === computerSelection) {
+            console.log(
+              `Draw! Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
+            );
+          }
+        }
+
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+      }
+
+      playGame();
+    </script>
+  </body>
+</html>
