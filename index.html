@@ -4,25 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <script>
+      
       function getComputerChoice() {
         let randomNumber = Math.floor(Math.random() * 3);
         let computerChoice;
         if (randomNumber === 0) {
-          computerChoice = "scissors";
+          computerChoice = "Scissors";
         } else if (randomNumber === 1) {
-          computerChoice = "rock";
+          computerChoice = "Rock";
         } else {
-          computerChoice = "paper";
+          computerChoice = "Paper";
         }
 
         return computerChoice;
       }
 
       function getHumanChoice() {
-        let playerChoice = prompt("rock, scissors or paper?", "").toLowerCase();
+        let playerChoice;
         return playerChoice;
       }
 
@@ -60,14 +62,47 @@
           }
         }
 
-        playRound();
-        playRound();
-        playRound();
-        playRound();
-        playRound();
       }
 
-      playGame();
+      let body = document.querySelector("body")
+      let container = document.createElement("div");
+      let scoreDiv = document.createElement("div")
+      let selectionDiv = document.createElement("div");
+      let scissorsButton = document.createElement("button");
+      let rockButton = document.createElement("button");
+      let paperButton = document.createElement("button");
+      let span = document.createElement("span");
+      
+      container.classList.add("container");
+      scoreDiv.classList.add("scoreDiv");
+      selectionDiv.classList.add("selectionDiv");
+      scissorsButton.classList.add("scissorsButton");
+      rockButton.classList.add("rockButton");
+      paperButton.classList.add("paperButton");
+
+      scissorsButton.textContent = "Scissors";
+      rockButton.textContent = "Rock";
+      paperButton.textContent = "Paper";
+
+      span.textContent = `Your score: ${humanScore} vs Computer Score: ${computerScore}`;
+
+      scoreDiv.appendChild(span);
+
+      selectionDiv.appendChild(scissorsButton);
+      selectionDiv.appendChild(rockButton);
+      selectionDiv.appendChild(paperButton);
+
+      container.appendChild(scoreDiv);
+      container.appendChild(selectionDiv);
+
+      body.appendChild(container);
+
+      rockButton.addEventListener("click", function playRound("Rock", computerSelection){
+        
+      }
+
+
+      
     </script>
   </body>
 </html>
