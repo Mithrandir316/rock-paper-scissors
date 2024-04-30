@@ -4,11 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock, Paper, Scissors</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <script>
-      
       function getComputerChoice() {
         let randomNumber = Math.floor(Math.random() * 3);
         let computerChoice;
@@ -23,68 +22,62 @@
         return computerChoice;
       }
 
-      function getHumanChoice() {
-        let playerChoice;
-        return playerChoice;
-      }
-
       let humanScore = 0;
-        let computerScore = 0;
+      let computerScore = 0;
 
-      function playGame() {
-        
+      /* function playGame() {
+          function playRound() {
+          let humanSelection = getHumanChoice();
+           let computerSelection = getComputerChoice();
+           if (
+             (humanSelection === "rock" && computerSelection === "paper") ||
+             (humanSelection === "paper" && computerSelection === "scissors") ||
+             (humanSelection === "scissors" && computerSelection === "rock")
+           ) {
+             computerScore += 1;
+             console.log(
+               `You lost! ${computerSelection} beats ${humanSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
+             );
+           } else if (
+             (humanSelection === "rock" && computerSelection === "scissors") ||
+             (humanSelection === "scissors" && computerSelection === "paper") ||
+             (humanSelection === "paper" && computerSelection === "rock")
+           ) {
+             humanScore += 1;
+             console.log(
+               `You win! ${humanSelection} beats ${computerSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
+             );
+           } else if (humanSelection === computerSelection) {
+             console.log(
+               `Draw! Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
+             );
+           }
+         } 
+      }*/
 
-        function playRound(humanSelection, computerSelection) {
-          humanSelection = getHumanChoice();
-          computerSelection = getComputerChoice();
-          if (
-            (humanSelection === "rock" && computerSelection === "paper") ||
-            (humanSelection === "paper" && computerSelection === "scissors") ||
-            (humanSelection === "scissors" && computerSelection === "rock")
-          ) {
-            computerScore += 1;
-            console.log(
-              `You lost! ${computerSelection} beats ${humanSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
-            );
-          } else if (
-            (humanSelection === "rock" && computerSelection === "scissors") ||
-            (humanSelection === "scissors" && computerSelection === "paper") ||
-            (humanSelection === "paper" && computerSelection === "rock")
-          ) {
-            humanScore += 1;
-            console.log(
-              `You win! ${humanSelection} beats ${computerSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
-            );
-          } else if (humanSelection === computerSelection) {
-            console.log(
-              `Draw! Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
-            );
-          }
-        }
-
-      }
-
-      let body = document.querySelector("body")
+      let body = document.querySelector("body");
       let container = document.createElement("div");
-      let scoreDiv = document.createElement("div")
+      let scoreDiv = document.createElement("div");
       let selectionDiv = document.createElement("div");
       let scissorsButton = document.createElement("button");
       let rockButton = document.createElement("button");
       let paperButton = document.createElement("button");
       let span = document.createElement("span");
-      
+      let paragraph = document.createElement("p");
+
       container.classList.add("container");
       scoreDiv.classList.add("scoreDiv");
       selectionDiv.classList.add("selectionDiv");
       scissorsButton.classList.add("scissorsButton");
       rockButton.classList.add("rockButton");
       paperButton.classList.add("paperButton");
+      paragraph.classList.add("paragraph");
 
       scissorsButton.textContent = "Scissors";
       rockButton.textContent = "Rock";
       paperButton.textContent = "Paper";
 
-      span.textContent = `Your score: ${humanScore} vs Computer Score: ${computerScore}`;
+      span.textContent = `Your score ${humanScore} : ${computerScore} Computer Score`;
 
       scoreDiv.appendChild(span);
 
@@ -97,12 +90,26 @@
 
       body.appendChild(container);
 
-      rockButton.addEventListener("click", function playRound("Rock", computerSelection){
-        
-      }
-
-
-      
+      rockButton.addEventListener("click", function () {
+        function playRound() {
+          let computerSelection = getComputerChoice();
+          if (computerSelection === "Paper") {
+            computerScore += 1;
+            paragraph.textContent = `You lost! ${computerSelection} beats ${humanSelection}.`;
+            selectionDiv.appendChild(paragraph);
+            console.log(
+              `You lost! ${computerSelection} beats ${humanSelection}.`
+            );
+          } else if (computerSelection === "scissors") {
+            humanScore += 1;
+            paragraph.textContent = `You win! ${humanSelection} beats ${computerSelection}.`;
+            selectionDiv.appendChild(paragraph);
+          } else if (humanSelection === computerSelection) {
+            paragraph.textContent = `Draw!`;
+            selectionDiv.appendChild(paragraph);
+          }
+        }
+      });
     </script>
   </body>
 </html>
