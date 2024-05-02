@@ -22,38 +22,48 @@
         return computerChoice;
       }
 
+
+
       let humanScore = 0;
       let computerScore = 0;
+      
 
-      /* function playGame() {
-          function playRound() {
-          let humanSelection = getHumanChoice();
-           let computerSelection = getComputerChoice();
-           if (
-             (humanSelection === "rock" && computerSelection === "paper") ||
-             (humanSelection === "paper" && computerSelection === "scissors") ||
-             (humanSelection === "scissors" && computerSelection === "rock")
-           ) {
-             computerScore += 1;
-             console.log(
-               `You lost! ${computerSelection} beats ${humanSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
-             );
-           } else if (
-             (humanSelection === "rock" && computerSelection === "scissors") ||
-             (humanSelection === "scissors" && computerSelection === "paper") ||
-             (humanSelection === "paper" && computerSelection === "rock")
-           ) {
-             humanScore += 1;
-             console.log(
-               `You win! ${humanSelection} beats ${computerSelection}. Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
-             );
-           } else if (humanSelection === computerSelection) {
-             console.log(
-               `Draw! Score is: Human Score - ${humanScore} : ${computerScore} - Computer Score`
-             );
-           }
-         } 
-      }*/
+      function playRound(humanSelection) {
+
+        let computerSelection = getComputerChoice();
+        if (
+          (humanSelection === "Rock" && computerSelection === "Paper") ||
+          (humanSelection === "Paper" && computerSelection === "Scissors") ||
+          (humanSelection === "Scissors" && computerSelection === "Rock")
+        ) {
+          computerScore += 1;
+          span.textContent = `Your score ${humanScore} : ${computerScore} Computer Score`;
+          paragraph.textContent = `You lost! ${computerSelection} beats ${humanSelection}`;
+        } else if (
+          (humanSelection === "Rock" && computerSelection === "Scissors") ||
+          (humanSelection === "Scissors" && computerSelection === "Paper") ||
+          (humanSelection === "Paper" && computerSelection === "Rock")
+        ) {
+          humanScore += 1;
+          span.textContent = `Your score ${humanScore} : ${computerScore} Computer Score`;
+          paragraph.textContent = `You win! ${computerSelection} beats ${humanSelection}`;
+        } else if (humanSelection === computerSelection) {
+          span.textContent = `Your score ${humanScore} : ${computerScore} Computer Score`;
+          paragraph.textContent = `Draw! Your choice is ${humanSelection}. Computer choice is ${computerSelection}`;
+        }
+
+        if(humanScore === 5){
+          span.textContent = `You win! Score ${humanScore} : ${computerScore} Computer Score`;
+          rockButton.remove(addEventListener);
+          paperButton.remove(addEventListener);
+          scissorsButton.remove(addEventListener);
+        }else if(computerScore === 5){
+          span.textContent = `You lose! Score ${humanScore} : ${computerScore} Computer Score`
+          rockButton.remove(addEventListener);
+          paperButton.remove(addEventListener);
+          scissorsButton.remove(addEventListener);
+        }
+      }
 
       let body = document.querySelector("body");
       let container = document.createElement("div");
@@ -77,39 +87,35 @@
       rockButton.textContent = "Rock";
       paperButton.textContent = "Paper";
 
-      span.textContent = `Your score ${humanScore} : ${computerScore} Computer Score`;
-
       scoreDiv.appendChild(span);
 
       selectionDiv.appendChild(scissorsButton);
       selectionDiv.appendChild(rockButton);
       selectionDiv.appendChild(paperButton);
+      
+      span.textContent = "Choose your weapon";
 
       container.appendChild(scoreDiv);
       container.appendChild(selectionDiv);
+      container.appendChild(paragraph);
 
       body.appendChild(container);
 
-      rockButton.addEventListener("click", function () {
-        function playRound() {
-          let computerSelection = getComputerChoice();
-          if (computerSelection === "Paper") {
-            computerScore += 1;
-            paragraph.textContent = `You lost! ${computerSelection} beats ${humanSelection}.`;
-            selectionDiv.appendChild(paragraph);
-            console.log(
-              `You lost! ${computerSelection} beats ${humanSelection}.`
-            );
-          } else if (computerSelection === "scissors") {
-            humanScore += 1;
-            paragraph.textContent = `You win! ${humanSelection} beats ${computerSelection}.`;
-            selectionDiv.appendChild(paragraph);
-          } else if (humanSelection === computerSelection) {
-            paragraph.textContent = `Draw!`;
-            selectionDiv.appendChild(paragraph);
-          }
+      rockButton.addEventListener(
+        "click", function(){
+          playRound("Rock")
         }
-      });
+      );
+      paperButton.addEventListener(
+        "click", function(){
+          playRound("Paper")
+        }
+      );
+      scissorsButton.addEventListener(
+        "click", function(){
+          playRound("Scissors")
+        }
+      );
     </script>
   </body>
 </html>
